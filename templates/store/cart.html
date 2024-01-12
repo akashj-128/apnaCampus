@@ -5,7 +5,13 @@
     <div class="container">
     
     <!-- ============================ COMPONENT 1 ================================= -->
-    
+    {% if not cart_item %}
+    <h2 class="text-center"> Your Shoping Cart is Empty </h2>
+    <br>
+    <div class="text-center">
+     <a href="{% url 'store' %}" class="btn btn-primary">Continue Shoping</a>
+    </div>
+    {% else %}
     <div class="row">
         <aside class="col-lg-9">
     <div class="card">
@@ -35,7 +41,7 @@
                         <div class="col"> 
                             <div class="input-group input-spinner">
                                 <div class="input-group-prepend">
-                                <button class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-minus"></i> </button>
+                                <a href="{% url 'remove_cart' cart_item.product.id %}" class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-minus"></i> </a>
                                 </div>
                                 <input type="text" class="form-control"  value="{{ cart_item.quantity }}">
                                 <div class="input-group-append">
@@ -51,7 +57,7 @@
             </div> <!-- price-wrap .// -->
         </td>
         <td class="text-right"> 
-        <a href="" class="btn btn-danger"> Remove</a>
+        <a href="{% url 'remove_cart_item' cart_item.product.id %}" class="btn btn-danger"> Remove</a>
         </td>
     </tr>
     {% endfor %}
@@ -89,6 +95,7 @@
     
     
     </div> <!-- row.// -->
+    {% endif %}
     <!-- ============================ COMPONENT 1 END .// ================================= -->
     
     </div> <!-- container .//  -->
